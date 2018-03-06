@@ -1,0 +1,60 @@
+    <div class="col-lg-12" id="fronthaulDiv"><br>
+      {% load widget_tweaks %}
+      <form id="frontHaulConfigForm" method="post" autocomplete="off">
+              {% csrf_token %}
+      {% if form_fronthaul.errors %}
+        <div class="alert alert-danger col-lg-12">
+          <h4>Please fix the following errors</h4>
+          <ul>
+            {% for field in form_fronthaul %}
+              {% if field.errors %}
+                {% for error in field.errors %}
+                  <li class="errorlist">{{ error|escape }}</li>
+                {% endfor %}
+              {% endif %}
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+      <div class="ibox float-e-margins targetDiv">
+        <div class="ibox-title">
+          <h5>Fronthaul Configuration</h5>
+          <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+        </div>
+        <div class="ibox-content">
+          <div class="webgui-configuration">
+              <div>
+                <label >Connection Type</label>
+                <strong>COPPER ( Port: 10 )</strong> </div>
+              <div>
+                <label>BC ID {% if form_fronthaul.BCID.field.required %}<span class="required-asterisk">*</span>{% endif %}</label>
+               {% if form_fronthaul.BCID.errors %}
+              {{ form_fronthaul.BCID|add_class:"fieldError" }}
+              {% else %}
+              {{ form_fronthaul.BCID }}
+              {% endif %}
+              <div class="errorlist wizard-error">{{form_fronthaul.BCID.errors.as_text|cut:"*"}}</div>
+              </div>
+              <div>
+                <label>VLAN ID {% if form_fronthaul.VLANID.field.required %}<span class="required-asterisk">*</span>{% endif %}</label>
+                {% if form_fronthaul.VLANID.errors %}
+              {{ form_fronthaul.VLANID|add_class:"fieldError" }}
+              {% else %}
+              {{ form_fronthaul.VLANID }}
+              {% endif %}
+              <div class="errorlist wizard-error">{{form_fronthaul.VLANID.errors.as_text|cut:"*"}}</div>
+              </div>
+              <div>
+                <label>TC ID {% if form_fronthaul.TCID.field.required %}<span class="required-asterisk">*</span>{% endif %}</label>
+                {% if form_fronthaul.TCID.errors %}
+              {{ form_fronthaul.TCID |add_class:"fieldError" }}
+              {% else %}
+              {{ form_fronthaul.TCID  }}
+              {% endif %}
+              <div class="errorlist wizard-error">{{form_fronthaul.TCID.errors.as_text|cut:"*"}}</div>
+              </div>
+          </div>
+        </div>
+      </div>
+      </form>
+    </div>

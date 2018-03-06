@@ -1,0 +1,216 @@
+        <div class="col-lg-12" id="bcDiv">
+          {% load widget_tweaks %}
+          <br>
+          {% if form_bc.errors or form_nominalgps.errors %}
+                <div class="alert alert-danger col-lg-12">
+                  <h4>Please fix the following errors</h4>
+                  <ul>
+                    {% for field in form_bc %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <ul>
+                    {% for field in form_nominalgps %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+          <div class="col-lg-6">
+            <div class="ibox float-e-margins targetDiv">
+              <div class="ibox-title">
+                <h5>Boundary Clock Configuration</h5>
+                <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+              </div>
+              <div class="ibox-content">
+                <div class="webgui-configuration">
+                  <form id="boundaryClockForm" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div>
+                      <label >Connection Type</label>
+                      <strong>COPPER ( Port: 7 )</strong> </div>
+
+                    <div>
+                      <label>Mode</label>
+                      {% for radio in form_bc.Mode %}
+                            {{ radio }}
+                      {% endfor %}
+                    </div>
+                    <div class="static">
+                      <label>IP Address</label>
+                      {% if form_bc.IPAddress.errors %}
+                      {{ form_bc.IPAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.IPAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.IPAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Subnet</label>
+                      {% if form_bc.SubnetMask.errors %}
+                      {{ form_bc.SubnetMask |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.SubnetMask  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.SubnetMask.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Default Gateway</label>
+                      {{ form_bc.DefaultGateway }}
+                      {% if form_bc.TCID.errors %}
+                      {{ form_bc.TCID |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.TCID  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.DefaultGateway.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Primary DNS</label>
+                      {% if form_bc.PrimaryDNSAddress.errors %}
+                      {{ form_bc.PrimaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.PrimaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.PrimaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Secondary DNS</label>
+                      {% if form_bc.SecondaryDNSAddress.errors %}
+                      {{ form_bc.SecondaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.SecondaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.SecondaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="border-bottom p-m">
+                      <h4>Master IP Address : </h4>
+                    </div>
+                    <div>
+                      <label>PTP-Server</label>
+                      {% if form_bc.PTPServers.errors %}
+                      {{ form_bc.PTPServers |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_bc.PTPServers  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_bc.PTPServers.errors.as_text|cut:"*" }}</div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="ibox float-e-margins targetDiv" >
+              <div class="ibox-title">
+                <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+              </div>
+              <div class="ibox-content">
+                <div> &nbsp; </div>
+                <div class="webgui-configuration">
+                  <form id="nominalGpsForm" method="post" autocomplete="off">
+                    {%csrf_token%}
+                    <h4>Nominal GPS Configuration</h4>
+                    <div>
+                      <label>Latitude Sign</label>
+                      {% if form_nominalgps.LatitudeSign.errors %}
+                      {{ form_nominalgps.LatitudeSign |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.LatitudeSign  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.LatitudeSign.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Degrees of Latitude</label>
+                      {% if form_nominalgps.DegreesOfLatitude.errors %}
+                      {{ form_nominalgps.DegreesOfLatitude |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.DegreesOfLatitude  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.DegreesOfLatitude.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Degrees of Longitude</label>
+                      {% if form_nominalgps.DegreesOfLongitude.errors %}
+                      {{ form_nominalgps.DegreesOfLongitude |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.DegreesOfLongitude  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.DegreesOfLongitude.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Degrees of Altitude</label>
+                      {% if form_nominalgps.DirectionOfAltitude.errors %}
+                      {{ form_nominalgps.DirectionOfAltitude |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.DirectionOfAltitude  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.DirectionOfAltitude.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Altitude</label>
+                      {% if form_nominalgps.Altitude.errors %}
+                      {{ form_nominalgps.Altitude |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.Altitude  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.Altitude.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Uncertanity Semi-Major</label>
+                      {% if form_nominalgps.UncertaintySemiMajor.errors %}
+                      {{ form_nominalgps.UncertaintySemiMajor |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.UncertaintySemiMajor  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.UncertaintySemiMajor.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Uncertanity Semi-Minor</label>
+                      {% if form_nominalgps.UncertaintySemiMinor.errors %}
+                      {{ form_nominalgps.UncertaintySemiMinor |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.UncertaintySemiMinor  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.UncertaintySemiMinor.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Uncertanity Altitude</label>
+                      {% if form_nominalgps.UncertaintyAltitude.errors %}
+                      {{ form_nominalgps.UncertaintyAltitude |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.UncertaintyAltitude  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.UncertaintyAltitude.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Orientation of Major Axis</label>
+                      {% if form_nominalgps.OrientationOfMajorAxis.errors %}
+                      {{ form_nominalgps.OrientationOfMajorAxis |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.OrientationOfMajorAxis  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.OrientationOfMajorAxis.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Confidence</label>
+                      {% if form_nominalgps.Confidence.errors %}
+                      {{ form_nominalgps.Confidence |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_nominalgps.Confidence  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_nominalgps.Confidence.errors.as_text|cut:"*" }}</div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>

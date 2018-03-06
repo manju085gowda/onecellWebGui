@@ -1,0 +1,98 @@
+<ul id="leftnavigation" class="nav nav-wizard wizard-tp-padd">
+      <li id="questionnaire" class="visited"> <a href="#step1">
+        <p class="step step_success">1</p>
+        Deployment Questionnaire</a> </li>
+      <li class="visited"> <a href="#step2">
+        <p id="file_upload_step" class="step">2</p>
+        File Upload</a> </li>
+      <li id="nic" class="visited"> <a href="">
+          {% if form_mgmt.is_valid and form_s1.is_valid and form_oam.is_valid and form_bc.is_valid and form_fronthaul.is_valid and form_rdncy.is_valid and form_s1G.is_valid and form_oamG.is_valid %}
+          <p id="nic_status" class="step step_success">3</p>
+          {% else %}
+           <p id="nic_status" class="step step_error">3</p>
+          {% endif %}
+        Network Interface Configuration <i class="fa fa-angle-down step-downarrow" aria-hidden="true"></i></a>
+        <ul class="nav nav-wizard">
+          <li class="visited"> <a href="#step3a">
+              {% if form_mgmt.errors %}
+                <i class="fa fa-times errorlist" id="mgmtinterfaceconfigFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="mgmtinterfaceconfigFormNav" ></i>
+              {% endif %}
+              MGMT Port Configuration</a> </li>
+          <li id="backhaulstep" class="visited"> <a href="#step3b">
+              {% if form_s1.errors or form_oam.errors or form_s1G.errors or form_oamG.errors  %}
+                <i class="fa fa-times errorlist" id="backhaulFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="backhaulFormNav" ></i>
+              {% endif %}
+              Backhaul Configuration</a> </li>
+          <li id="bclock" class="visited"> <a href="#step3c">
+              {% if form_bc.errors %}
+                <i class="fa fa-times errorlist" id="boundaryClockFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="boundaryClockFormNav" ></i>
+              {% endif %}
+              Boundary Clock Configuration</a> </li>
+          <li id="fronthaul" class="visited"> <a href="#step3d">
+              {% if form_fronthaul.errors %}
+                <i class="fa fa-times errorlist" id="frontHaulConfigFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="frontHaulConfigFormNav" ></i>
+              {% endif %}
+              Fronthaul Configuration</a> </li>
+          <li id="redundancy" class="visited"> <a href="#step3e">
+              {% if form_rdncy.errors %}
+                <i class="fa fa-times errorlist" id="redundancyFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="redundancyFormNav" ></i>
+              {% endif %}
+              High Availablity</a> </li>
+        </ul>
+      </li>
+      <li id="hems" class="visited"> <a href="">
+        {% if form_hems.is_valid and form_caserver.is_valid %}
+          <p id="operator_status" class="step step_success">4</p>
+          {% else %}
+          <p id="operator_status" class="step step_error">4</p>
+          {% endif %}
+        Operator Configuration <i class="fa fa-angle-down step-downarrow" aria-hidden="true"></i></a>
+        <ul class="nav nav-wizard">
+          <li class="visited"> <a href="#step4a">
+              {% if form_hems.errors %}
+                <i class="fa fa-times errorlist" id="hemsConfigFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="hemsConfigFormNav" ></i>
+              {% endif %}
+              HeMS Configuration</a> </li>
+          <li id="caserversection" class="visited"> <a href="#step4b">
+              {% if form_caserver.errors %}
+                <i class="fa fa-times errorlist" id="caServerConfigFormNav" ></i>
+              {% else %}
+              <i class="fa fa-check success_color" id="caServerConfigFormNav" ></i>
+              {% endif %}
+              CA Server Configuration</a> </li>
+          <li class="visited"> <a href="#step4c">
+              Root Certificate Configuration</a> </li>
+        </ul>
+      </li>
+      <li id="snmp" class="visited"> <a href="#step5">
+        {% if form_snmp.errors %}
+          <p id="snmp_step" class="step step_error">5</p>
+          {% else %}
+          <p id="snmp_step" class="step step_success">5</p>
+          {% endif %}
+        SNMP Configuration</a> </li>
+      <li class="visited"> <a href="#step6">
+        <p id="user_step" class="step">6</p>
+        User Management</a> </li>
+      <li  class="visited"> <a href="#step7">
+        <p id="whitelist_step" class="step">7</p>
+        Whitelist Configuration</a> </li>
+      <li class="visited"> <a href="#step8">
+        <p id="license_step" class="step">8</p>
+        View and Apply License</a> </li>
+      <li id="summarypage" class="visited"> <a href="#step9" class="no-borders">
+        <p class="step">9</p>
+        Confirm and Submit</a> </li>
+    </ul>

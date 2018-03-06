@@ -1,0 +1,187 @@
+
+            <div class="col-lg-12" id="snmpDiv">
+                {% load widget_tweaks %}
+              <form id="snmpConfigForm" method="post" autocomplete="off">
+              {% if form_snmp.errors %}
+                    <div class="alert alert-danger">
+                      <h4>Please fix the following errors</h4>
+                      <ul>
+                        {% for field in form_snmp %}
+                          {% if field.errors %}
+                            {% for error in field.errors %}
+                              <li class="errorlist">{{ error|escape }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                      {% if form_snmp.non_field_errors %}
+                        {{ form_snmp.non_field_errors }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+              <div class="ibox float-e-margins m-l targetDiv" >
+
+                  {%csrf_token%}
+                <div class="m-b-md">
+                  <label >SNMP Traps</label>
+                  {{form_snmp.SNMPTraps}}
+                    <div class="errorlist wizard-error">{{ form_snmp.SNMPTraps.errors.as_text|cut:"*" }}</div>
+                </div>
+                <div class="webgui-configuration">
+                    <div>
+                      <label>SNMP IP Address / Domain Name</label>
+                        {% if form_snmp.SNMPIP.errors %}
+                          {{ form_snmp.SNMPIP|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.SNMPIP }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.SNMPIP.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>SNMP Port</label>
+                        {% if form_snmp.SNMPPort.errors %}
+                          {{ form_snmp.SNMPPort|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.SNMPPort }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.SNMPPort.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>User Based Security Model (USM)</label>
+                      {{form_snmp.USM}}
+                        <div class="errorlist wizard-error">{{ form_snmp.USM.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="usm_enable">
+                      <label>User Name</label>
+                        {% if form_snmp.UserName.errors %}
+                          {{ form_snmp.UserName|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.UserName }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.UserName.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="usm_enable">
+                      <label>Auth Protocol</label>
+                        {% if form_snmp.AuthProtocol.errors %}
+                          {{ form_snmp.AuthProtocol|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.AuthProtocol }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.AuthProtocol.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="usm_enable">
+                      <label>Auth Key</label>
+                        {% if form_snmp.AuthKey.errors %}
+                          {{ form_snmp.AuthKey|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.AuthKey }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.AuthKey.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="usm_enable">
+                      <label>Private Portocol</label>
+                        {% if form_snmp.PrivateProtocol.errors %}
+                          {{ form_snmp.PrivateProtocol|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.PrivateProtocol }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.PrivateProtocol.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="usm_enable">
+                      <label>Private Key</label>
+                        {% if form_snmp.PrivateKey.errors %}
+                          {{ form_snmp.PrivateKey|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_snmp.PrivateKey }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_snmp.PrivateKey.errors.as_text|cut:"*" }}</div>
+                    </div>
+                </div>
+                <div class="p-xs"></div>
+                <div class="border-top-bottom p-xs">
+                  <h4>Supported SNMP Trap Configuration</h4>
+                </div>
+                <div class="p-xxs"></div>
+                <div id="guidata_wrapper" class="dataTables_wrapper">
+                  <!--<table id="guidata" class="display dataTable" cellspacing="0" width="100%" role="grid" aria-describedby="guidata_info" style="width: 100%;">
+                    <thead>
+                      <tr role="row">
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1" style="width: 126px;">Supported Alarm Index</th>
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1"  style="width: 100px;" aria-sort="descending">Event Type</th>
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1" style="width: 103px;"> Problem Cause</th>
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1"  style="width: 88px;"> Perceived Severity</th>
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1"  style="width: 91px;">Reporting Mechanism</th>
+                        <th class="sorting" tabindex="0" aria-controls="guidata" rowspan="1" colspan="1" style="width: 79px;">SNMP Trap</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr role="row" class="odd">
+                        <td class="">1</td>
+                        <td class="">Security</td>
+                        <td>IPSec Tunnel Failure</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox" checked></td>
+                      </tr>
+                      <tr role="row" class="even">
+                        <td class="">2</td>
+                        <td class="">Licensing</td>
+                        <td>Excess Capacity Units</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                      <tr role="row" class="odd">
+                        <td class="">3</td>
+                        <td class="">Radio Point</td>
+                        <td>Manju Plane Down</td>
+                        <td><span class="label label-warning">Warning</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox" checked></td>
+                      </tr>
+                      <tr role="row" class="even">
+                        <td class="">4</td>
+                        <td class="">Licensing</td>
+                        <td>Excess Capacity Units</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                      <tr role="row" class="odd">
+                        <td class="">5</td>
+                        <td class="">Security</td>
+                        <td>IPSec Tunnel Failure</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox" checked></td>
+                      </tr>
+                      <tr role="row" class="even">
+                        <td class="">6</td>
+                        <td class="">Licensing</td>
+                        <td>Excess Capacity Units</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                      <tr role="row" class="odd">
+                        <td class="">7</td>
+                        <td class="">Radio Point</td>
+                        <td>Conrol Plane Down</td>
+                        <td><span class="label label-warning">Warning</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox" checked></td>
+                      </tr>
+                      <tr role="row" class="even">
+                        <td class="">8</td>
+                        <td class="">Licensing</td>
+                        <td>Excess Capacity Units</td>
+                        <td><span class="label label-danger">Critical</span></td>
+                        <td>Expedited</td>
+                        <td><input type="checkbox"></td>
+                      </tr>
+                    </tbody>
+                  </table>-->
+                </div>
+              </div>
+              </form>
+

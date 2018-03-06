@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Login</title>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body class="pace-done fixed-nav mini-navbar loginform-bg">
+<div class="pace  pace-inactive">
+  <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+    <div class="pace-progress-inner"></div>
+  </div>
+  <div class="pace-activity"></div>
+</div>
+<div id="wrapper">
+  <div id="" class="gray-bg dashbard-1" style="min-height: 528px;">
+    <div class="row border-bottom">
+      <nav class="navbar navbar-fixed-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header"> <span class="logo" style="padding:0px 0px 30px 20px;"> <img src="{% static 'images/logo-white.png' %}"></span> </div>
+      </nav>
+    </div>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="ibox-content-tabs loginform-bg ">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"> 
+              
+              <!--Add User UI Starts -->
+              
+              <div class="loginform">
+                <div class="loginform-header">
+                  <h1>Sign In to Continue</h1>
+                  <!--<div class="signin-error" id="loginErrorMessage">Enter the username and password.</div>-->
+                  {% if form.errors %}
+                  <div class="signin-error">Your username and password didn't match. Please try again.</div>
+                  {% endif %}
+
+                  {% if next %}
+                      {% if user.is_authenticated %}
+                  <p>Your account doesn't have access to this page. To proceed,
+                      please login with an account that has access.</p>
+                      {% else %}
+
+                    <div class="signin-error">Please login to see this page.</div>
+                      {% endif %}
+                  {% endif %}
+                </div>
+                <div class="loginform-panel one">
+                  <div class="loginform-content">
+                    <form id="loginForm" method="POST" action="/login/" autocomplete="off">
+                        {% csrf_token %}
+                      <div class="loginform-group">
+                        <label>Username</label>
+                        {{ form.username }}
+                      </div>
+                      <div class="loginform-group">
+                        <label>Password</label>
+                        {{ form.password }}
+                      </div>
+                      <div class="loginform-group">
+                        <label>Language</label>
+                        {{ form.language }}
+                      </div>
+                      <div class="loginform-group">
+                        <button class="btn btn-success" type="submit" value="Login" >Login</button>
+                      </div>
+                       <input type="hidden" name="next" value="{{ next }}" />
+                    </form>
+                  </div>
+                </div>
+              </div>
+              
+              <!--Add User UI Ends --> 
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Mainly scripts --> 
+
+
+</body>
+</html>

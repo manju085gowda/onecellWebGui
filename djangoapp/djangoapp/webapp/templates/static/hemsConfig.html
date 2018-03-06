@@ -1,0 +1,47 @@
+            <div class="col-lg-12" id="hemsDiv">
+               <form id="hemsConfigForm" method="post" autocomplete="off">
+                    {% csrf_token %}
+                {% load widget_tweaks %}
+              {% if form_hems.errors %}
+                    <div class="alert alert-danger">
+                      <h4>Please fix the following errors</h4>
+                      <ul>
+                        {% for field in form_hems %}
+                          {% if field.errors %}
+                            {% for error in field.errors %}
+                              <li class="errorlist">{{ error|escape }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                      {% if form_hems.non_field_errors %}
+                        {{ form_hems.non_field_errors }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+              <div class="ibox float-e-margins m-l targetDiv"  >
+                <div class="webgui-configuration">
+                    <h4>HeMS Configuration</h4>
+                    <div>
+                      <label>HeMS URL</label>
+                        {% if form_hems.HeMSURL.errors %}
+                          {{ form_hems.HeMSURL|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_hems.HeMSURL }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_hems.HeMSURL.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>HeMS Access</label>
+                        {% if form_hems.HeMSAccess.errors %}
+                          {{ form_hems.HeMSAccess|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_hems.HeMSAccess }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{ form_hems.HeMSAccess.errors.as_text|cut:"*" }}</div>
+                    </div>
+                </div>
+              </div>
+               </form>
+            </div>
+

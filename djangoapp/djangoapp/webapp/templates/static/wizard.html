@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  {% load staticfiles %}
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>OneCell Configuration Wizard</title>
+<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'css/wizard.css' %}" rel="stylesheet">
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/toggle.css' %}" rel="stylesheet">
+<link href="{% static 'css/jquery.dataTables.min.css' %}" rel="stylesheet">
+  <link href="{% static 'css/font-awesome.min.css' %}" rel="stylesheet">
+   <link href="{% static 'css/font-awesome.css' %}" rel="stylesheet">
+</head>
+<body class="pace-done fixed-nav mini-navbar wizardform-bg">
+<div class="pace  pace-inactive">
+  <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+    <div class="pace-progress-inner"></div>
+  </div>
+  <div class="pace-activity"></div>
+</div>
+<div id="wrapper">
+  <div id="" class="dashbard-1" style="min-height: 528px;">
+    {% include 'header.html' %}
+    <div class="row ">
+      <div class="col-lg-12">
+        <div>
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+
+              <div class="row wizard-align">
+                <div id="plain" class="example">
+                  <div class="wizard">
+
+                    {% include 'navigation.html' %}
+
+                    <!--Step 1 Deployment Questionnaire Starts-->
+                    <div class="wizard-pane wizard-top-head" id="step1">Step by Step Wizard contains the configuration procedure of Baseband Controller
+                      <form id="questionform" name= "" action="." method="POST">
+                 {% csrf_token %}
+                 <h2 class="wizard-head">Deployment Questionnaire</h2>
+                   <div class="question" id="question1">
+                   <div class='question-headline'> BC Uses which of the following to communicate with <b>MMES</b> </div>
+                   <div class="question-answers">
+                     <div class="answer">
+                       {% for radio in form_questionnaire.bc_mme_communication %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                 <div class="question" id="question2">
+                   <div class='question-headline'> BC Uses which of the following to communicate with <b>HeMS</b> </div>
+                   <div class="question-answers">
+                     <div class="answer">
+                       {% for radio in form_questionnaire.bc_hems_communication %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                 <div class="question" id="question3">
+                   <div class='question-headline'> BC Uses which of the following to communicate with <b>CA Server certificate access</b> </div>
+                   <div class="question-answers">
+                     <div class="answer">
+                       {% for radio in form_questionnaire.bc_ca_communication %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                 <div class="question" id="question4">
+                   <div class='question-headline'> BC Uses which of the following for <b>Timing Source</b> </div>
+                   <div class="question-answers">
+                     <div class="answer">
+                       {% for radio in form_questionnaire.bc_timing %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                 <div class="question" id="question5">
+                   <div class='question-headline'> BC Uses which of the following to communicate with <b>Boundary Clock</b> </div>
+                   <div class="question-answers">
+                     <div class="answer">
+                       {% for radio in form_questionnaire.bc_ptp_port %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                 <div class="question no-borders" id="question6">
+                   <div class='question-headline'> Is this Baseband Controller part of a Redundancy Cluster?</div>
+                   <div class="question-answers">
+                     <div class="answer ">
+                       {% for radio in form_questionnaire.bc_redundancy_enable %}
+                         <div class="">
+                             {{ radio }}
+                         </div>
+                         {% endfor %}
+                     </div>
+                   </div>
+                 </div>
+                </form>
+                    </div>
+                    <!--Step 1 Deployment Questionnaire Ends-->
+                    <!--Step 2 File upload Starts-->
+                    <div class="wizard-pane" id="step2"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">File Upload</h2>
+                      <h5>Note: Configuration File Upload may be skipped; in this case, all fields on the subsequent screens will need to be entered manually by the user.</h5>
+                      <div class="row m-t-xl wizard-txt" align="center">
+                          <form method="POST" action='/upload/' id="form_fileupload" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="input-group col-lg-4 col-lg-offset-4">
+                              <label class="input-group-btn">
+                                  <span class="btn btn-success">
+                                      Browse {{form_configfile}}
+                                  </span>
+                              </label>
+                              <input type="text" class="form-control" readonly="" />
+                          </div>
+                            <div class="col-lg-1">
+                              <input id="upload-btn" class="btn btn-success" value="Upload" type="submit" />
+                            </div>
+                              <div align="center" style="margin-top: 10px;margin-bottom: 10px;" class="input-group col-lg-4 col-lg-offset-4">.tar,.tar.gz,.zip <span class="m-l-sm">( Browse and upload file to configure )</span></div>
+                          </form>
+						<div id="loading-image" class ="loading" style="display:none;">
+                              <img class ="loading-style" src="../static/ajax-loader.gif"/>
+                            </div>																											   
+                      </div>
+                        <div class="alert alert-danger alert-dismissable fade in" id="upload_status" style="display: none;"></div>
+                      <div class="col-lg-12 wizard-file-btn">
+                        <button id="download_zip" type="button" class="btn btn-white pull-right">Download sample Zip file with all configurations</button>
+                        <div class=" pull-right p-xs">
+                          <h5>Note: The sample files contain sample configurations. Download to edit/update files. Upload changes using File Upload.</h5>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 2 File upload Ends-->
+                    <!--Step 3a MGMT Port Configuration Starts-->
+<!--Step 3a MGMT Port Configuration Starts-->
+                    <div class="wizard-pane" id="step3a"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Network and Interface Configuration</h2>
+                      <div class="row  white-bg ">
+                          {% include 'onecell_representation.html' %}
+                          <div class="wrapper wrapper-content">
+                          <div class="row">
+
+                              {% include 'managementPortConfig.html' %}
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                    <!--Step 3a MGMT Port Configuration Ends-->
+
+                    <!--Step 3b Backhaul Port Configuration Starts-->
+                    <div class="wizard-pane" id="step3b"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Network and Interface Configuration</h2>
+                      <div class="row white-bg ">
+                        {% include 'onecell_representation.html' %}
+                          <div class="wrapper wrapper-content">
+                              <div class="row">
+                        {% include 'backhaul.html' %}
+                              </div>
+                             </div>
+                      </div>
+                    </div>
+                    <!--Step 3b Backhaul Port Configuration ends-->
+                    <!--Step 3c Boundary Clock Configuration Starts-->
+                    <div class="wizard-pane" id="step3c"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Network and Interface Configuration</h2>
+                      <div class="row  white-bg ">
+                        {% include 'onecell_representation.html' %}
+                           <div class="wrapper wrapper-content">
+                            <div class="row">
+                        {% include 'boundaryClock.html' %}
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 3c Boundary Clock Configuration Ends-->
+                    <!--Step 3d Fronhaul Port  Starts-->
+                    <div class="wizard-pane" id="step3d"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Network and Interface Configuration</h2>
+                      <div class="row white-bg ">
+                        {% include 'onecell_representation.html' %}
+                        <div class="wrapper wrapper-content">
+                              <div class="row">
+                        {% include 'fronthaul.html' %}
+                              </div>
+                             </div>
+                      </div>
+                    </div>
+                    <!--Step 3d Boundary Clock Port Configuration Ends-->
+                    <!--Step 3e High Availablity Starts-->
+                    <div class="wizard-pane" id="step3e"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Network and Interface Configuration</h2>
+                      <div class="row white-bg ">
+                        {% include 'onecell_representation.html' %}
+                        <div class="wrapper wrapper-content">
+                          <div class="row">
+                              {% include 'redundancy.html' %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 3e High Availablity Port Configuration Ends-->
+                    <!--Step 4a HeMS Configuration Port Configuration Starts-->
+                    <div class="wizard-pane" id="step4a"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                          <h2 class="wizard-head">Operator Configuration</h2>
+                    <div class="row white-bg ">
+                    <div class="wrapper wrapper-content">
+                      <div class="row">
+                      {% include 'hemsConfig.html' %}
+                      </div>
+                    </div>
+                    </div>
+                    </div>
+                    <!--Step 4a HeMS Configuration Ends-->
+                    <!--Step 4b CA Server Configuration Starts-->
+                    <div class="wizard-pane" id="step4b"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                         <h2 class="wizard-head">Operator Configuration</h2>
+                        <div class="row white-bg ">
+                            <div class="wrapper wrapper-content">
+                              <div class="row">
+                        {% include 'caServerConfig.html' %}
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Step 4b CA Server Configuration  Ends-->
+                    <!--Step 4c CA Root Certificate Configuration Starts-->
+                    <div class="wizard-pane" id="step4c"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Operator Configuration</h2>
+                    <div class="row white-bg ">
+                        <div class="wrapper wrapper-content">
+                          <div class="row">
+                        {% include 'rootCertificate.html' %}
+                          </div>
+                        </div>
+                    </div>
+                    </div>
+                    <!--Step 4c CA Root Certificate Configuration  Ends-->
+                    <!--Step 5 SNMP Configuration Port Configuration Starts-->
+                    <div class="wizard-pane" id="step5"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                          <h2 class="wizard-head">SNMP Configuration</h2>
+                        <div class="row white-bg ">
+                            <div class="wrapper wrapper-content">
+                              <div class="row">
+                        {% include 'snmp.html' %}
+                                              </div>
+                              </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 5 SNMP Configuration Ends-->
+                    <!--Step 6 User Mgmt Configuration Starts-->
+                    <div class="wizard-pane" id="step6"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      {% include 'userManagement.html' %}
+                    </div>
+                    <!--Step 6 User Mgmt Configuration Ends-->
+                    <!--Step 7 Whitelist Configuration Starts-->
+                    <div class="wizard-pane" id="step7"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">Whitelist Configuration</h2>
+                      <div class="row  white-bg ">
+                        <div class="wrapper wrapper-content">
+                          <div class="row">
+                        {% include 'whitelist.html' %}
+                                                        </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 7 Whitelist Configuration Ends-->
+                    <!--Step 8 View and Apply License Configuration Starts-->
+                    <div class="wizard-pane" id="step8"> <span class="wizard-top-head">Step by Step Wizard contains the configuration procedure of Baseband Controller</span>
+                      <h2 class="wizard-head">View and Apply License</h2>
+                      <div class="row  white-bg ">
+                        <div class="wrapper wrapper-content">
+                          <div class="row">
+                        {% include 'viewapplylicense.html' %}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!--Step 8 View and Apply License Configuration Ends-->
+                    <!--Step 9 Confirm and Submit Configuration Starts-->
+                    <div class="wizard-pane" id="step9">
+                        <div id="summarydiv">
+                      <h3>Confirm and Submit</h3>
+                      {% include 'summaryPage.html' %}
+                        </div>
+                        <div class="hide" id="apply-progress">
+                      <h3>Applying Configurations..</h3>
+                        {% include 'progressbar.html' %}
+                    </div>
+                        <div class="hide" id="config-success">
+                      <h3>Configuration applied successfully</h3>
+                        {% include 'config-success.html' %}
+                    </div>
+                    </div>
+
+                    <!--Step 9 Confirm and Submit Configuration Ends-->
+                  </div>
+                  <!-- wizard -->
+                </div>
+                <!-- example -->
+
+              </div>
+              <!-- /container -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include 'aboutUs.html' %}
+{% include 'helpFiles/help.html' %}
+<!-- Mainly scripts -->
+<script src="{% static 'js/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/custom.js' %}"></script>
+<script src="{% static 'js/bootstrap-toggle.min.js' %}"></script>
+<script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'js/wizard.js' %}"></script>
+<script src="{% static 'js/wizard-init.js' %}"></script>
+<script src="{% static 'js/jquery-ajax-validation.js' %}"></script>
+<script src="{% static 'js/jquery.tabledit.js' %}"></script>
+<script src="{% static 'js/wizard_FormValidation.js' %}"></script>
+<script src="{% static 'js/jquery-quickedit.js' %}"></script>
+<!--
+<script src="{% static 'js/jquery.autotab.js' %}"></script>
+-->
+</body>
+</html>

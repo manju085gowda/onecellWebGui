@@ -1,0 +1,36 @@
+                            <div class="col-lg-12" id="whitelistDiv">
+                              <div class="ibox float-e-margins">
+                                <div class="ibox-title bg-gradient">
+                                  <form method="post" action='/whitelist_upload/' id="whitelistForm">
+                                    {% csrf_token %}
+                                      <div class="input-group col-lg-4" >
+                                        <label class="input-group-btn">
+                                            <span class="btn btn-success">
+                                                Import New WhiteList {{form_whitelist.whitelist_file}}
+                                            </span>
+                                        </label>
+                                        <input type="text" class="form-control" readonly>
+                                    </div>
+                                      <div class="col-lg-6" style="width:10%;">
+
+                                        <button class="btn btn-success" type="submit">Upload</button>
+                                      </div>
+                                      <img id="loading-image_whitelist" style="display:none;height:16px;width:16px;margin-right:5px" class="loading-style" src="../static/ajax-loader.gif"/>
+                                      <!--<div id="loading-image_whitelist" class="loading" style="display:none;">
+                                        <img id="loading-image_whitelist" style="display:none;" class="loading-style" src="../static/ajax-loader.gif"/>
+                                    </div>-->
+                                      <span><b>Note: Upload New Whitelist overwrites current Whitelist configuration</b></span>
+                                  </form>
+                                </div>
+                                  <div class="alert alert-success alert-dismissable fade in" id="whitelist_upload_status_success" style="margin-top: 10px;display: none;"></div>
+                                  <div class="alert alert-danger alert-dismissable fade in" id="whitelist_upload_status_error" style="margin-top: 10px;display: none;"></div>
+
+                                  <div class=" pull-left full-width border-bottom p-xxs">
+                                  <h4>Radio Point Whitelist</h4>
+                                </div>
+                                  <div id="guidata_wrapper" class="dataTables_wrapper p-xs">
+                                      <table id="whitelist_table" class="display" width="100%"></table>
+                                  </div>
+                              </div>
+                            </div>
+

@@ -1,0 +1,90 @@
+<div class="col-lg-12" id="mgmtDiv">
+{% load widget_tweaks %}
+    <div class="ibox float-e-margins targetDiv"  >
+                  <br>
+      <form id="mgmtinterfaceconfigForm" method="POST" autocomplete="off">
+                  {% if form_mgmt.errors %}
+                    <div class="alert alert-danger">
+                      <h4>Please fix the following errors</h4>
+                      <ul>
+                        {% for field in form_mgmt %}
+                          {% if field.errors %}
+                            {% for error in field.errors %}
+                              <li class="errorlist">{{ error|escape }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  {% endif %}
+
+                <div class="ibox-title">
+                  <h5>Management Interface Configuration</h5>
+                  <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+                </div>
+                <div class="ibox-content">
+                  <div class="webgui-configuration">
+                    {% csrf_token %}
+                        <div>
+                        <label>Mode</label>
+                        {% for radio in form_mgmt.Mode %}
+                              {{ radio }}
+                        {% endfor %}
+                        </div>
+                    <div class="webgui-configuration" id="ipformreplace">
+                      <div class="static">
+                        <label>IP Address{% if form_mgmt.IPAddress.field.required %}<span class="required-asterisk">*</span>{% endif %} </label>
+                        {% if form_mgmt.IPAddress.errors %}
+                          {{ form_mgmt.IPAddress|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_mgmt.IPAddress }}
+                          {% endif %}
+                          <div class="errorlist wizard-error">{{form_mgmt.IPAddress.errors.as_text|cut:"*"}}</div>
+                      </div>
+                      <div class="static">
+                        <label>Subnet{% if form_mgmt.SubnetMask.field.required %}<span class="required-asterisk">*</span>{% endif %} </label>
+                          {% if form_mgmt.SubnetMask.errors %}
+                          {{ form_mgmt.SubnetMask|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_mgmt.SubnetMask }}
+                          {% endif %}
+
+                          <div class="errorlist wizard-error">{{form_mgmt.SubnetMask.errors.as_text|cut:"*"}}</div>
+                      </div>
+                      <div class="static">
+                        <label>Default Gateway{% if form_mgmt.DefaultGateway.field.required %}<span class="required-asterisk">*</span>{% endif %} </label>
+                          {% if form_mgmt.DefaultGateway.errors %}
+                          {{ form_mgmt.DefaultGateway|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_mgmt.DefaultGateway }}
+                          {% endif %}
+
+                        <div class="errorlist wizard-error">{{form_mgmt.DefaultGateway.errors.as_text|cut:"*"}}</div>
+
+                      </div>
+                      <div class="static">
+                        <label>Primary DNS{% if form_mgmt.PrimaryDNSAddress.field.required %}<span class="required-asterisk">*</span>{% endif %} </label>
+
+                          {% if form_mgmt.PrimaryDNSAddress.errors %}
+                          {{ form_mgmt.PrimaryDNSAddress|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_mgmt.PrimaryDNSAddress }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{form_mgmt.PrimaryDNSAddress.errors.as_text|cut:"*"}}</div>
+
+                      </div>
+                      <div class="static">
+                        <label>Secondary DNS</label>
+                          {% if form_mgmt.SecondaryDNSAddress.errors %}
+                          {{ form_mgmt.SecondaryDNSAddress|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_mgmt.SecondaryDNSAddress }}
+                          {% endif %}
+                        <div class="errorlist wizard-error">{{form_mgmt.SecondaryDNSAddress.errors.as_text|cut:"*"}}</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+      </form>
+    </div>
+</div>

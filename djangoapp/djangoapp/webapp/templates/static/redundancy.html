@@ -1,0 +1,130 @@
+<div class="col-lg-12" id="rdncyDiv">
+    {% load widget_tweaks %}
+      <br>
+        <form id="redundancyForm" method="post" autocomplete="off">
+            {% csrf_token %}
+     {% if form_rdncy.errors %}
+            <div class="alert alert-danger">
+              <h4>Please fix the following errors</h4>
+              <ul>
+                {% for field in form_rdncy %}
+                  {% if field.errors %}
+                    {% for error in field.errors %}
+                      <li class="errorlist">{{ error|escape }}</li>
+                    {% endfor %}
+                  {% endif %}
+                {% endfor %}
+              </ul>
+              {% if form_rdncy.non_field_errors %}
+                {{ form_rdncy.non_field_errors }}
+              {% endif %}
+            </div>
+          {% endif %}
+      <div class="col-lg-6">
+        <div class="ibox float-e-margins targetDiv">
+          <div class="ibox-title">
+            <h5>High Availablity</h5>
+            <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+          </div>
+          <div class="ibox-content">
+            <div class="m-b-md">
+              <label >Redundancy</label>
+             {{ form_rdncy.BCRedundancy }}
+            </div>
+            <div class="webgui-configuration">
+
+                <div class="border-bottom p-m">
+                  <h4>Redundancy Feature Configuration</h4>
+                </div>
+                <div>
+                  <label>BC State</label>
+                  {% for radio in form_rdncy.CUState %}
+                        {{ radio }}
+                  {% endfor %}
+                </div>
+                <div id="vcellid">
+                  <label>Virtual Cell ID</label>
+                    {% if form_rdncy.VirtualCellID.errors %}
+                      {{ form_rdncy.VirtualCellID|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.VirtualCellID }}
+                      {% endif %}
+                    <div class="errorlist wizard-error">{{ form_rdncy.VirtualCellID.errors.as_text|cut:"*" }}</div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="ibox float-e-margins targetDiv" >
+          <div class="ibox-title">
+            <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+          </div>
+          <div class="ibox-content">
+            <div class="m-b-md"> &nbsp; </div>
+            <div class="webgui-configuration">
+                <div class="border-bottom p-m m-b-md">
+                  <h4>Redundancy Interface Configuration</h4>
+                </div>
+                <div>
+                  <label >Connection Type</label>
+                  <strong>COPPER ( Port: 9 )</strong> </div>
+                <div>
+                <label>Mode</label>
+                {% for radio in form_rdncy.Mode %}
+                      {{ radio }}
+                {% endfor %}
+                </div>
+              <div class="static">
+                <label>IP Address</label>
+                  {% if form_rdncy.IPAddress.errors %}
+                      {{ form_rdncy.IPAddress|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.IPAddress }}
+                      {% endif %}
+                   <div class="errorlist wizard-error">{{ form_rdncy.IPAddress.errors.as_text|cut:"*" }}</div>
+              </div>
+              <div class="static">
+                <label>Subnet</label>
+                  {% if form_rdncy.SubnetMask.errors %}
+                      {{ form_rdncy.SubnetMask|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.SubnetMask }}
+                      {% endif %}
+                   <div class="errorlist wizard-error">{{ form_rdncy.SubnetMask.errors.as_text|cut:"*" }}</div>
+              </div>
+              <div class="static">
+                <label>Default Gateway</label>
+                  {% if form_rdncy.DefaultGateway.errors %}
+                      {{ form_rdncy.DefaultGateway|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.DefaultGateway }}
+                      {% endif %}
+                   <div class="errorlist wizard-error">{{ form_rdncy.DefaultGateway.errors.as_text|cut:"*" }}</div>
+
+              </div>
+              <div class="static">
+                <label>Primary DNS</label>
+                  {% if form_rdncy.PrimaryDNSAddress.errors %}
+                      {{ form_rdncy.PrimaryDNSAddress|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.PrimaryDNSAddress }}
+                      {% endif %}
+                   <div class="errorlist wizard-error">{{ form_rdncy.PrimaryDNSAddress.errors.as_text|cut:"*" }}</div>
+
+              </div>
+              <div class="static">
+                <label>Secondary DNS</label>
+                  {% if form_rdncy.SecondaryDNSAddress.errors %}
+                      {{ form_rdncy.SecondaryDNSAddress|add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_rdncy.SecondaryDNSAddress }}
+                      {% endif %}
+                   <div class="errorlist wizard-error">{{ form_rdncy.SecondaryDNSAddress.errors.as_text|cut:"*" }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+        </form>
+    </div>

@@ -1,0 +1,367 @@
+        <div class="col-lg-12" id="backhaulDiv">
+          {% load widget_tweaks %}
+          <br>
+              {% if not form_s1.is_valid or form_oam.is_valid or form_s1G.is_valid or form_oamG.is_valid %}
+                <div class="alert alert-danger col-lg-12">
+                  <h4>Please fix the following errors</h4>
+                  <ul>
+                    {% for field in form_s1 %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <ul>
+                    {% for field in form_oam %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <ul>
+                    {% for field in form_s1G %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                  <ul>
+                    {% for field in form_oamG %}
+                      {% if field.errors %}
+                        {% for error in field.errors %}
+                          <li class="errorlist">{{ error|escape }}</li>
+                        {% endfor %}
+                      {% endif %}
+                    {% endfor %}
+                  </ul>
+                </div>
+              {% endif %}
+
+          <div class="col-lg-6">
+            <div class="ibox float-e-margins targetDiv" id="div2" style="">
+              <div class="ibox-title">
+                <h5>Backhaul Configuration</h5>
+                <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+              </div>
+              <div class="ibox-content">
+                <div class="m-b-md">
+                  <label >Connection Type</label>
+                  <strong>COPPER ( Port: 8 )</strong> </div>
+                <div  class="webgui-configuration">
+                  <div id="s1configuration">
+                  <form id="backhaulFormS1" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="border-bottom p-m">
+                      <h4>S1 Configuration</h4>
+                    </div>
+                    <div>
+                      <label>VLAN ID</label>
+                      {% if form_s1.VLANID.errors %}
+                      {{ form_s1.VLANID |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.VLANID  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.VLANID.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>MTU</label>
+                      {% if form_s1.MTU.errors %}
+                      {{ form_s1.MTU |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.MTU  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.MTU.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Mode</label>
+                      {% for radio in form_s1.Mode %}
+                            {{ radio }}
+                      {% endfor %}
+                    </div>
+                    <div class="static">
+                      <label>IP Address</label>
+                      {% if form_s1.IPAddress.errors %}
+                      {{ form_s1.IPAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.IPAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.IPAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Subnet</label>
+                      {% if form_s1.SubnetMask.errors %}
+                      {{ form_s1.SubnetMask |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.SubnetMask  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.SubnetMask.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Default Gateway</label>
+                      {% if form_s1.DefaultGateway.errors %}
+                      {{ form_s1.DefaultGateway |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.DefaultGateway  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.DefaultGateway.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Primary DNS</label>
+                      {% if form_s1.PrimaryDNSAddress.errors %}
+                      {{ form_s1.PrimaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.PrimaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.PrimaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Secondary DNS</label>
+                      {% if form_s1.SecondaryDNSAddress.errors %}
+                      {{ form_s1.SecondaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1.SecondaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1.SecondaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                  </form>
+                  </div>
+                    <div class="border-bottom"></div>
+                    <div id="s1Gateway">
+                   <form id="backhaulS1Gateway" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div>
+                      <label>Security Gateway FQDN / IP Address</label>
+                      {% if form_s1G.SecGWURL.errors %}
+                      {{ form_s1G.SecGWURL |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.SecGWURL  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.SecGWURL.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Address Type</label>
+                      {% if form_s1G.AddressType.errors %}
+                      {{ form_s1G.AddressType |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.AddressType  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.AddressType.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal Address</label>
+                      {% if form_s1G.InternalAddress.errors %}
+                      {{ form_s1G.InternalAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.InternalAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.InternalAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal Net Mask</label>
+                      {% if form_s1G.InternalNetMask.errors %}
+                      {{ form_s1G.InternalNetMask |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.InternalNetMask  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.InternalNetMask.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal DNS</label>
+                      {% if form_s1G.InternalDNS.errors %}
+                      {{ form_s1G.InternalDNS |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.InternalDNS  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.InternalDNS.errors.as_text|cut:"*" }}</div>
+                    </div>
+<!--                    <div class="static">
+                      <label>Internal DNS</label>
+                      {% if form_s1G.InternalDHCP.errors %}
+                      {{ form_s1G.InternalDHCP |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.InternalDHCP  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.InternalDHCP.errors.as_text|cut:"*" }}</div>
+                    </div> -->
+                    <div class="">
+                      <label>Exclude CP</label>
+                      {% if form_s1G.ExcludeCP.errors %}
+                      {{ form_s1G.ExcludeCP |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_s1G.ExcludeCP  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_s1G.ExcludeCP.errors.as_text|cut:"*" }}</div>
+                    </div>
+                   </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="ibox float-e-margins targetDiv" >
+              <div class="ibox-title">
+                <div class="ibox-tools"> <a class="collapse-link"> </a> </div>
+              </div>
+
+              <div class="ibox-content">
+                <div class="m-b-md"> &nbsp; </div>
+                <div class="webgui-configuration">
+                  <div id="oamconfig">
+                  <form id="oamConfigForm" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="border-bottom p-m">
+                      <h4>OAM Configuration</h4>
+                    </div>
+                    <div>
+                      <label>VLAN ID</label>
+                      {% if form_oam.VLANID.errors %}
+                      {{ form_oam.VLANID |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.VLANID  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.VLANID.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>MTU</label>
+                      {% if form_oam.MTU.errors %}
+                      {{ form_oam.MTU |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.MTU  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.MTU.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Mode</label>
+                      {% for radio in form_oam.Mode %}
+                            {{ radio }}
+                      {% endfor %}
+                    </div>
+                    <div class="static">
+                      <label>IP Address</label>
+                      {% if form_oam.IPAddress.errors %}
+                      {{ form_oam.IPAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.IPAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.IPAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Subnet</label>
+                      {% if form_oam.SubnetMask.errors %}
+                      {{ form_oam.SubnetMask |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.SubnetMask  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.SubnetMask.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Default Gateway</label>
+                      {% if form_oam.DefaultGateway.errors %}
+                      {{ form_oam.DefaultGateway |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.DefaultGateway  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.DefaultGateway.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Primary DNS</label>
+                      {% if form_oam.PrimaryDNSAddress.errors %}
+                      {{ form_oam.PrimaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.PrimaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.PrimaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Secondary DNS</label>
+                      {% if form_oam.SecondaryDNSAddress.errors %}
+                      {{ form_oam.SecondaryDNSAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oam.SecondaryDNSAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oam.SecondaryDNSAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                  </form>
+                  </div>
+                    <div class="border-bottom"></div>
+                  <div id="oamgateway">
+                    <form id="backhaulOAMGateway" method="post" autocomplete="off">
+                    {% csrf_token %}
+                    <div>
+                      <label>Security Gateway FQDN / IP Address</label>
+                      {% if form_oamG.SecGWURL.errors %}
+                      {{ form_oamG.SecGWURL |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.SecGWURL  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.SecGWURL.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Address Type</label>
+                      {% if form_oamG.AddressType.errors %}
+                      {{ form_oamG.AddressType |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.AddressType  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.AddressType.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal Address</label>
+                      {% if form_oamG.InternalAddress.errors %}
+                      {{ form_oamG.InternalAddress |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.InternalAddress  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.InternalAddress.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal Net Mask</label>
+                      {% if form_oamG.InternalNetMask.errors %}
+                      {{ form_oamG.InternalNetMask |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.InternalNetMask  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.InternalNetMask.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div class="static">
+                      <label>Internal DNS</label>
+                      {% if form_oamG.InternalDNS.errors %}
+                      {{ form_oamG.InternalDNS |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.InternalDNS  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.InternalDNS.errors.as_text|cut:"*" }}</div>
+                    </div>
+<!--                     <div class="static">
+                     <label>Internal DNS</label>
+                      {% if form_oamG.InternalDHCP.errors %}
+                      {{ form_oamG.InternalDHCP |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.InternalDHCP  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.InternalDHCP.errors.as_text|cut:"*" }}</div>
+                    </div>-->
+                    <div class="">
+                      <label>Exclude CP</label>
+                      {% if form_oamG.ExcludeCP.errors %}
+                      {{ form_oamG.ExcludeCP |add_class:"fieldError" }}
+                      {% else %}
+                      {{ form_oamG.ExcludeCP  }}
+                      {% endif %}
+                      <div class="errorlist wizard-error-dual">{{ form_oamG.ExcludeCP.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+

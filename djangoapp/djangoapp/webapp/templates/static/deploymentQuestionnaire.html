@@ -1,0 +1,78 @@
+    <div class="wizard-pane wizard-top-head" id="step1">Step by Step Wizard contains the configuration procedure of Baseband Controller
+      <form id="questionform" name= "" action="." method="POST">
+    {% csrf_token %}
+    <h2 class="wizard-head">Deployment Questionnaire</h2>
+    <div class="question" id="question1">
+    <div class='question-headline'> BC Uses which of the following to communicate with <b>MMES</b> </div>
+    <div class="question-answers">
+     <div class="answer">
+       {% for radio in form_questionnaire.bc_mme_communication %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    <div class="question" id="question2">
+    <div class='question-headline'> BC Uses which of the following to communicate with <b>HeMS</b> </div>
+    <div class="question-answers">
+     <div class="answer">
+       {% for radio in form_questionnaire.bc_hems_communication %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    <div class="question" id="question3">
+    <div class='question-headline'> BC Uses which of the following to communicate with <b>CA Server access</b> </div>
+    <div class="question-answers">
+     <div class="answer">
+       {% for radio in form_questionnaire.bc_ca_communication %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    <div class="question" id="question4">
+    <div class='question-headline'> BC Uses which of the following for <b>Timing Source</b> </div>
+    <div class="question-answers">
+     <div class="answer">
+       {% for radio in form_questionnaire.bc_timing %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    <div class="question" id="question5">
+    <div class='question-headline'> BC Uses which of the following to communicate with <b>Boundary Clock</b> </div>
+    <div class="question-answers">
+     <div class="answer">
+       {% for radio in form_questionnaire.bc_ptp_port %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    <div class="question no-borders" id="question6">
+    <div class='question-headline'> Is this Baseband Controller part of a Redundancy Cluster?</div>
+    <div class="question-answers">
+     <div class="answer ">
+       {% for radio in form_questionnaire.bc_redundancy_enable %}
+         <div class="">
+             {{ radio }}
+         </div>
+         {% endfor %}
+     </div>
+    </div>
+    </div>
+    </form>
+    </div>

@@ -1,0 +1,24 @@
+{% load staticfiles %}
+
+<div class="row">
+      <nav class="navbar navbar-fixed-top " role="navigation" style="margin-bottom: 0">
+        <div class="navbar-header"> <span class="logo" style="padding:0px 0px 30px 20px;"> <img src="{% static 'images/logo-white.png' %}"></span> </div>
+        <div class="col-lg-6 notify-height" align="center" >
+          <div class="ibox-notification-top "> <span  class=" top-notify-txt">Serial No :  0005B9427C92 </span><span class="top-notify-txt">Hardware Version : 700742.1</span> <span  class="top-notify-txt"> Software Version :  2.0.00.291 </span> </div>
+        </div>
+        <ul class="nav navbar-top-links navbar-right">
+          <li> <a data-toggle="modal" data-target="#helpModal" > <i class="fa fa-question-circle "></i> </a> </li>
+          <li class="dropdown"> <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#" aria-expanded="false">
+            {% if user.is_authenticated %}
+                Welcome  {{ user.username }}
+            {% endif %}
+            <i class="fa  fa-angle-down"></i> </a>
+            <ul class="dropdown-menu dropdown-alerts">
+              <li><a data-toggle="modal" data-target="#aboutModal" > About Us </a></li>
+              <li class="divider">&nbsp;</li>
+              <li> <a href="/logout/"> Logout </a> </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+    </div>

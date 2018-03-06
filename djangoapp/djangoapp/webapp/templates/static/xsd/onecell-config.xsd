@@ -1,0 +1,249 @@
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="OneCell-Config-Profile">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Port-Configuration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Management-Interface-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="Mode"/>
+                    <xs:element type="IPType" name="IPAddress"/>
+                    <xs:element type="xs:short" name="SubnetMask"/>
+                    <xs:element type="IPType" name="DefaultGateway"/>
+                    <xs:element type="IPType" name="PrimaryDNSAddress"/>
+                    <xs:element type="IPType" name="SecondaryDNSAddress"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="S1-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="VLANID"/>
+                    <xs:element type="xs:short" name="MTU"/>
+                    <xs:element type="xs:string" name="Mode"/>
+                    <xs:element type="IPType" name="IPAddress"/>
+                    <xs:element type="xs:short" name="SubnetMask"/>
+                    <xs:element type="IPType" name="DefaultGateway"/>
+                    <xs:element type="IPType" name="PrimaryDNSAddress"/>
+                    <xs:element type="IPType" name="SecondaryDNSAddress"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SeGW1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="SecGWURL"/>
+                    <xs:element type="xs:string" name="AddressType"/>
+                    <xs:element type="xs:string" name="InternalAddress"/>
+                    <xs:element type="xs:short" name="InternalNetMask"/>
+                    <xs:element type="xs:string" name="InternalDNS"/>
+                    <xs:element type="xs:string" name="ExcludeCP"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="OAM-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="VLANID"/>
+                    <xs:element type="xs:short" name="MTU"/>
+                    <xs:element type="xs:string" name="Mode"/>
+                    <xs:element type="IPType" name="IPAddress"/>
+                    <xs:element type="xs:short" name="SubnetMask"/>
+                    <xs:element type="IPType" name="DefaultGateway"/>
+                    <xs:element type="IPType" name="PrimaryDNSAddress"/>
+                    <xs:element type="IPType" name="SecondaryDNSAddress"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="SeGW2">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="SecGWURL"/>
+                    <xs:element type="xs:string" name="AddressType"/>
+                    <xs:element type="xs:string" name="InternalAddress"/>
+                    <xs:element type="xs:string" name="InternalNetMask"/>
+                    <xs:element type="xs:string" name="InternalDNS"/>
+                    <xs:element type="xs:string" name="ExcludeCP"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Boundary-Clock-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="TimingSource"/>
+                    <xs:element type="xs:short" name="VLANID"/>
+                    <xs:element type="xs:short" name="MTU"/>
+                    <xs:element type="xs:string" name="Mode"/>
+                    <xs:element type="IPType" name="IPAddress"/>
+                    <xs:element type="xs:short" name="SubnetMask"/>
+                    <xs:element type="IPType" name="DefaultGateway"/>
+                    <xs:element type="IPType" name="PrimaryDNSAddress"/>
+                    <xs:element type="IPType" name="SecondaryDNSAddress"/>
+                    <xs:element type="xs:string" name="PTPServers"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Nominal-GPS-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="LatitudeSign"/>
+                    <xs:element type="xs:short" name="DegreesOfLatitude"/>
+                    <xs:element type="xs:short" name="DegreesOfLongitude"/>
+                    <xs:element type="xs:string" name="DirectionOfAltitude"/>
+                    <xs:element type="xs:short" name="Altitude"/>
+                    <xs:element type="xs:short" name="UncertaintySemiMajor"/>
+                    <xs:element type="xs:short" name="UncertaintySemiMinor"/>
+                    <xs:element type="xs:short" name="UncertaintyAltitude"/>
+                    <xs:element type="xs:short" name="OrientationOfMajorAxis"/>
+                    <xs:element type="xs:short" name="Confidence"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Front-Haul-Configuration">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:short" name="BCID"/>
+                    <xs:element type="xs:short" name="VLANID"/>
+                    <xs:element type="xs:short" name="TCID"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="Redundancy">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="BCRedundancy"/>
+                    <xs:element type="xs:string" name="CUState"/>
+                    <xs:element type="xs:string" name="VirtualCellID"/>
+                    <xs:element type="xs:string" name="Mode"/>
+                    <xs:element type="IPType" name="IPAddress"/>
+                    <xs:element type="xs:short" name="SubnetMask"/>
+                    <xs:element type="IPType" name="DefaultGateway"/>
+                    <xs:element type="IPType" name="PrimaryDNSAddress"/>
+                    <xs:element type="IPType" name="SecondaryDNSAddress"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Operator-Configuration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="HemsConfig">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:anyURI" name="HeMSURL"/>
+                    <xs:element type="xs:string" name="HeMSAccess"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="CAServerConfig">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="CAServer"/>
+                    <xs:element type="xs:string" name="CAServerIdentity"/>
+                    <xs:element type="xs:string" name="CAServerURI"/>
+                    <xs:element type="xs:short" name="CAServerPort"/>
+                    <xs:element type="xs:string" name="CAServerAccess"/>
+                    <xs:element type="xs:string" name="NONIPSecHttps"/>
+                    <xs:element type="xs:string" name="SACertificateIdentifier"/>
+                    <xs:element type="xs:string" name="PKIMessageHash"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SNMP-Configuration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="SNMPTraps"/>
+              <xs:element type="xs:string" name="SNMPIP"/>
+              <xs:element type="xs:short" name="SNMPPort"/>
+              <xs:element type="xs:string" name="USM"/>
+              <xs:element type="xs:string" name="UserName"/>
+              <xs:element type="xs:string" name="AuthProtocol"/>
+              <xs:element type="xs:string" name="AuthKey"/>
+              <xs:element type="xs:string" name="PrivateProtocol"/>
+              <xs:element type="xs:string" name="PrivateKey"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="User-Configuration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="AuthenticationType"/>
+              <xs:element name="LDAP-Authentication">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="LDAPServerName"/>
+                    <xs:element type="xs:string" name="ServerAddress"/>
+                    <xs:element type="xs:short" name="LDAPPort"/>
+                    <xs:element type="xs:short" name="ConnectionTimeout"/>
+                    <xs:element type="xs:short" name="RetryCount"/>
+                    <xs:element type="xs:string" name="AdminDN"/>
+                    <xs:element type="xs:string" name="AdminPassword"/>
+                    <xs:element type="xs:string" name="ConfirmAdminPassword"/>
+                    <xs:element type="xs:string" name="BaseDN"/>
+                    <xs:element type="xs:string" name="Filter"/>
+                    <xs:element type="xs:string" name="SecurityTypeTLS"/>
+                    <xs:element type="xs:string" name="SecurityTypeSASL"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="RADIUS-Authentication">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="ServerAddress"/>
+                    <xs:element type="xs:short" name="AuthenticationPort"/>
+                    <xs:element type="xs:short" name="ConnectionTimeout"/>
+                    <xs:element type="xs:short" name="RetryCount"/>
+                    <xs:element type="xs:string" name="SharedKey"/>
+                    <xs:element type="xs:string" name="DisconnectMessage"/>
+                    <xs:element type="xs:string" name="COASupport"/>
+                    <xs:element type="xs:string" name="NASIPAddress"/>
+                    <xs:element type="xs:string" name="NASIdentifier"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Whitelist-Configuration">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="Whitelist"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="Additional-FileNames-Included">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element type="xs:string" name="WhitelistFileName"/>
+              <xs:element type="xs:string" name="LicenseFileName"/>
+              <xs:element type="xs:string" name="SeGWRootCertFileName"/>
+              <xs:element name="DMSAuthCertFileNames">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element type="xs:string" name="DMSCert1"/>
+                    <xs:element type="xs:string" name="DMSCert2"/>
+                    <xs:element type="xs:string" name="DMSCert3"/>
+                    <xs:element type="xs:string" name="DMSCert4"/>
+                    <xs:element type="xs:string" name="DMSCert5"/>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+    <xs:simpleType name="IPType">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="((((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9]))\.){3}((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9])))(\-((((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9]))\.){3}((25[0-5])|(2[0-4][0-9])|([01]?[0-9]?[0-9]))))?"></xs:pattern>
+		</xs:restriction>
+   </xs:simpleType>
+</xs:schema>

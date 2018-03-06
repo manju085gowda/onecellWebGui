@@ -1,0 +1,101 @@
+            <div class="col-lg-12" id="caserverDiv">
+                <form id="caServerConfigForm" method="post" autocomplete="off">
+                    {% csrf_token %}
+              {% load widget_tweaks %}
+              {% if form_caserver.errors %}
+                    <div class="alert alert-danger">
+                      <h4>Please fix the following errors</h4>
+                      <ul>
+                        {% for field in form_caserver %}
+                          {% if field.errors %}
+                            {% for error in field.errors %}
+                              <li class="errorlist">{{ error|escape }}</li>
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                      {% if form_caserver.non_field_errors %}
+                        {{ form_caserver.non_field_errors }}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+              <div class="ibox float-e-margins m-l targetDiv" >
+                <div class="webgui-configuration">
+                    <h4>CA Server Configuration</h4>
+                    <div>
+                      <label>CA Server</label>
+                      {% if form_caserver.CAServer.errors %}
+                          {{ form_caserver.CAServer|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.CAServer }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.CAServer.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>CA Server Identity</label>
+                      {% if form_caserver.CAServerIdentity.errors %}
+                          {{ form_caserver.CAServerIdentity|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.CAServerIdentity }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.CAServerIdentity.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>CA Server URI</label>
+                      {% if form_caserver.CAServerURI.errors %}
+                          {{ form_caserver.CAServerURI|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.CAServerURI }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.CAServerURI.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>CA Server Port</label>
+                      {% if form_caserver.CAServerPort.errors %}
+                          {{ form_caserver.CAServerPort|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.CAServerPort }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.CAServerPort.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>CA Server Access</label>
+                      {% if form_caserver.CAServerAccess.errors %}
+                          {{ form_caserver.CAServerAccess|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.CAServerAccess }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.CAServerAccess.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>Non Ipsec Https</label>
+                      {% if form_caserver.NONIPSecHttps.errors %}
+                          {{ form_caserver.NONIPSecHttps|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.NONIPSecHttps }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.NONIPSecHttps.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>SA Certificate Identifier</label>
+                      {% if form_caserver.SACertificateIdentifier.errors %}
+                          {{ form_caserver.SACertificateIdentifier|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.SACertificateIdentifier }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.SACertificateIdentifier.errors.as_text|cut:"*" }}</div>
+                    </div>
+                    <div>
+                      <label>PKI Message Hash</label>
+                      {% if form_caserver.PKIMessageHash.errors %}
+                          {{ form_caserver.PKIMessageHash|add_class:"fieldError" }}
+                          {% else %}
+                          {{ form_caserver.PKIMessageHash }}
+                          {% endif %}
+                      <div class="errorlist wizard-error">{{ form_caserver.PKIMessageHash.errors.as_text|cut:"*" }}</div>
+                    </div>
+                </div>
+              </div>
+                </form>
+            </div>
+
